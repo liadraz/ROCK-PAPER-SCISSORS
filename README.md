@@ -27,3 +27,43 @@ Plan - Pseudo Code
         prompt the user for selecting Rock' or 'Paper' or 'Scissors'
         check for case insensitivity
             return playerSelection
+
+
+    Pseudo Code
+<!--
+// In each round //
+check who wins
+Show the result on the console. //
+        function singleRound
+            check who won the round
+            paper > rock
+            rock > scissors
+            scissors > paper
+            rock === rock || scisosrs === scisosrs || paper === paper 
+            tie! 
+           return "You Lose" // "You Win"
+           
+        console shows singleRound function result - Who won in this round
+
+
+// Play 5 rounds
+count the score
+report the winner or loser at the end.
+        function game()
+            iterate for 5 times 
+                if player === won
+                    add one score to player
+                else if computer === won
+                    add one score to computer
+                else 
+                    0
+
+            if playerScore === computer Score
+                return tie
+            else if computerScore > playerScore
+                return Computer wins!
+            else
+                return Player wins!
+
+        console shows game function result
+-->
