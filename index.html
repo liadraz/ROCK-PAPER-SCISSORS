@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Rock-Paper-Scissors Game</title>
+    <title>The Rock-Paper-Scissors Game</title>
 </head>
 
 <body style="background-color: beige;">
@@ -9,7 +9,7 @@
     <script>    
     
     // Play randomly and return eiter 'Rock', 'Paper', 'Scissors' to make the computer's play.
-    function getComputerPlay() {
+    function getComputerSelection() {
         let computerSelection = Math.floor(Math.random() * 3);
         if (computerSelection === 0) {
             return 'rock';
@@ -19,42 +19,48 @@
             return 'scissors';
     }    
 
-
-    // Prompt selection from the user.
+    // Prompt selection from the user. Check for validation
     function getPlayerSelection() {
-        let selection = prompt("Choose to play with - (Rock) (Paper) (Scissors)");
-        return selection.toLowerCase();
+        while (true) {
+            let playerSelection = prompt("Choose to play with - (Rock) (Paper) (Scissors)");
+            let input = playerSelection.toLowerCase();
+            if (input === 'rock' || input === 'paper' || input === 'Scissors') {
+                return input;
+            }
+        }
     }    
 
 
+    // Compare Player and Computer Selections. Count who win.
     function playRound(playerSelection, computerSelection) {
+
         if (playerSelection == computerSelection) {
             return "tie";
         } else {
             switch(playerSelection) {
             case 'rock':
-                // rock < paper
+                // If Player selection is Rock < paper is stronger
                 if (computerSelection === 'paper') {
                     return result = 'Computer Wins';
-                // rock  > scissors 
+                // Otherwise rock wins > scissors 
                 } else {
                     return result = 'You Win';
                 }
                 break
             case 'paper':
-                // paper < scissors
+                // If Player selection is paper < scissors is stronger
                 if (computerSelection === 'scissors') {
                     return result = 'Computer Wins'; 
-                // paper > rock
+                // Otherwise paper wins > rock
                 } else {
                     return result = 'You Win';
                 }
                 break
             case 'scissors':
-                // scissors < rock
+                // If Player selection is scissors < rock is stronger
                 if (computerSelection === 'rock') {
                     return result = 'Computer Wins'; 
-                // scissors > paper
+                // Otherwise scissors wins > paper
                 } else {
                     return result = 'You Win';
                 }
@@ -63,27 +69,45 @@
         }
     }
 
-    let playerSelection = getPlayerSelection();
-    let computerSelection = getComputerPlay();
-
     function game() {
-        let playerCounter = 0;
-        let computerCounter = 0;
-        let i = 0;
-        while (i < 5) {
-            let roundResult = playRound(playerSelection, computerSelection);
+        i = 0;
+        playerCounter = 0;
+        computerCounter = 0;
 
+        // Play a five round game
+        while (i < 5) {
+        
+            // Get player and compuer selection
+            let playerSelection = getPlayerSelection();
+            let computerSelection = getComputerSelection();
+            console.log(`Round No(${i + 1})`);
+            console.log(`\tPlayer Selection:\t${playerSelection} \n\tComputer Selection:\t${computerSelection}`)
+            
+            let roundResult = playRound(playerSelection, computerSelection);
+            console.log(`\t In this Round - ${roundResult}`);
+
+            // Count the winner for each round
             if (roundResult === 'You Win') {
-                playerCounter ++;
+                playerCounter++;
             } else if (roundResult === 'Computer Wins') {
-                computerCounter ++;
+                computerCounter++;
             }
-            console.log(`Round ${i + 1} - ${roundResult}`)
             i++;
         }
+        
+        const results = finalResults(playerCounter, computerCounter);
+        return console.log(`${results} \nPlayer: ${playerCounter} // Computer: ${computerCounter}`);
     }
 
-    // At the end report the winner
+    function finalResults(playerCounter, computerCounter) {
+        if (playerCounter > computerCounter) {
+            return "You WIN!"
+        }   else if (playerCounter < computerCounter) {
+            return "You Lost!"
+        } else {
+            return "It is a tie"
+        }
+    }
 
     game();
 
