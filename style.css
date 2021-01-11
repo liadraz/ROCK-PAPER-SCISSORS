@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: beige;
+    font-family: arial, sans-serif;
+}
+
+main {
+    margin: 0 auto;
+    border: 2px solid black;
+    text-align: center;
+}
+
+.players {
+    display: flex;
+}
+
+h3 {
+    text-align: center;
+    margin: 10px 
+}
+
+.scores-log {
+    display: flex;
+}
+
+.arena {
+    display: flex;
+}
+
+.box {
+    background: red;
+    border: 2px solid black;
+    width: 50px;
+    height: 50px;
+}
