@@ -1,40 +1,40 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>The Rock-Paper-Scissors Game</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <head>
+        <title>The Rock-Paper-Scissors Game</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
 
-<body>
-    
-    <main>
-        <h1>Rock-Paper-Scissors</h1>
-        
-            <div class="players">
-                <h3>Human</h3>
-                <h3>PC</h3>
-            </div>
-        
-            <div class="scores-log">
-                <h3>Win</h3>
-                <h3>Tie</h3>
-                <h3>Win</h3>
-            </div>
-        
-            <div class="arena">
-                <div class="box" id="human_box">ss</div>
-                <div class="box" id="PC_box">ss</div>
-            </div>
-        
-            <div class="Player-Selection">
-                <h3>Choose to play</h3>
-                <button id="rock">Rock</button>
-                <button id="paper">Paper</button>
-                <button id="scisoors">Scisoors</button>
-            </div>
-        
-    </main>
+    <body>
+        <main>
+            <h1>Rock  Paper  Scissors</h1>
+            
+                <div class="mainGrid">
+                    <h2>Player</h2>
+                    <h2>PC</h2>
+                </div>
+            
+                <div class="mainGrid">
+                    <h3>0</h3>
+                    <h3>score</h3>
+                    <h3>0</h3>
+                </div>
+            
+                <div class="arena">
+                    <div class="box" id="humanBox"></div>
+                    <div class="line"></div>
+                    <div class="box" id="PcBox"></div>
+                </div>
 
-</body>
+                <div class="mainGrid">
+                    <button class="playerButtons" id="rock"></button>
+                    <button class="playerButtons" id="paper"></button>
+                    <button class="playerButtons" id="scissors"></button>
+                </div>
+            
+        </main>
 
+    <!--     <script src="RPS.js"></script>
+    -->
+    </body>
 </html>

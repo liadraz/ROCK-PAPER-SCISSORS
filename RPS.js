@@ -1,4 +1,4 @@
-<script>    
+
     // Play randomly and return eiter 'Rock', 'Paper', 'Scissors' to make the computer's play.
     function getComputerSelection() {
         let computerSelection = Math.floor(Math.random() * 3);
@@ -101,5 +101,3 @@
     }
 
     game();
-
-    </script>
