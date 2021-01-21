@@ -1,40 +1,39 @@
+playerScore = document.querySelector('.playerScore');
+computerScore = document.querySelector('.computerScore'); 
+log = document.getElementsByClassName('log');    
 
 window.addEventListener('click', playRound);
 
+console.log(log)
 
-
-// Prompt selection from the user. Check for validation
 function playRound(e) {
     if (e.target.classList.contains('playerButton')) {
         
         const playerSelection = e.target.id;
         const computerSelection = getComputerSelection();
-        
-        let x = checkRoundWinner(playerSelection, computerSelection);
-        score(x);
+        let roundResult = checkRoundWinner(playerSelection, computerSelection);
+        console.log(roundResult);
+        addWinnerScore(roundResult);
     }
+}   
 
-    
-    function score(roundWinner) {
-        playerScore = document.querySelector('.playerScore');
-        computerScore = document.querySelector('.computerScore');        
-        
-    let computerCounter = 0;
-    let playerCounter = 0;
 
-    if (roundWinner === 'Computer') {
-        computerCounter++;
-        computerScore.textContent = computerCounter;
-    } else if (roundWinner === 'Player') {
-        playerCounter++;
-        playerScore.textContent = playerCounter;
+function counteScoreUp(div) {
+    counter = parseInt(div.textContent) + 1;
+    div.textContent = counter;
+    return div.textContent;
+}
+
+
+function addWinnerScore (result) {
+    if (result === 'Computer') {
+        counteScoreUp(computerScore); 
+    } else if (result === 'Player') {
+        counteScoreUp(playerScore); 
     } else {
         console.log('Tie');
     }
-}   
-    }
-    
-
+}
 
 
 // Computer play randomly and return eiter 'Rock', 'Paper', 'Scissors'.
