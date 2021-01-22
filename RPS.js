@@ -1,38 +1,44 @@
 playerScore = document.querySelector('.playerScore');
 computerScore = document.querySelector('.computerScore'); 
-log = document.getElementsByClassName('log');    
+log = document.querySelector('.log');    
+computerSelection = document.getElementById('PcBox');
+
 
 window.addEventListener('click', playRound);
 
-console.log(log)
-
 function playRound(e) {
     if (e.target.classList.contains('playerButton')) {
-        
-        const playerSelection = e.target.id;
-        const computerSelection = getComputerSelection();
+        let playerSelection = e.target.id;
+        let computerSelection = getComputerSelection();
+        console.log(`show play round function- ${computerSelection}`);
+        console.log(`Computer Selection ${playerSelection}`)
         let roundResult = checkRoundWinner(playerSelection, computerSelection);
-        console.log(roundResult);
+        console.log(`${roundResult}`)
         addWinnerScore(roundResult);
     }
 }   
 
 
+function showComputerSelections() {
+    selection = getComputerSelection()
+    console.log(`show computer selection function- ${selection}`)
+    computerSelection.appendChild(document.createTextNode(selection))
+}
+
+function addWinnerScore (result) {
+    if (result === 'Computer') {
+        return counteScoreUp(computerScore);
+    } else if (result === 'Player') {
+        return counteScoreUp(playerScore);
+    } else {
+        return console.log('Tie');
+    }
+}
+
 function counteScoreUp(div) {
     counter = parseInt(div.textContent) + 1;
     div.textContent = counter;
     return div.textContent;
-}
-
-
-function addWinnerScore (result) {
-    if (result === 'Computer') {
-        counteScoreUp(computerScore); 
-    } else if (result === 'Player') {
-        counteScoreUp(playerScore); 
-    } else {
-        console.log('Tie');
-    }
 }
 
 
@@ -47,7 +53,6 @@ function getComputerSelection() {
     return 'scissors';
 }
 
-
 // Compare Player and Computer Selections. Count who win.
 function checkRoundWinner(playerSelection, computerSelection) {
 
@@ -57,29 +62,29 @@ function checkRoundWinner(playerSelection, computerSelection) {
         switch(playerSelection) {
         case 'rock':
             // If Player selection is Rock < paper is stronger
-            if (computerSelection === 'paper') {
-                return 'Computer';
+            if (computerSelection != 'paper') {
+                return result = 'Computer Wins';
             // Otherwise rock wins > scissors 
             } else {
-                return 'Player';
+                return result = 'You Win';
             }
             break
         case 'paper':
             // If Player selection is paper < scissors is stronger
-            if (computerSelection === 'scissors') {
-                return 'Computer'; 
+            if (computerSelection != 'scissors') {
+                return result = 'Computer Wins'; 
             // Otherwise paper wins > rock
             } else {
-                return 'Player';
+                return result = 'You Win';
             }
             break
         case 'scissors':
             // If Player selection is scissors < rock is stronger
-            if (computerSelection === 'rock') {
-                return 'Computer'; 
+            if (computerSelection != 'rock') {
+                return result = 'Computer Wins'; 
             // Otherwise scissors wins > paper
             } else {
-                return 'Player';
+                return result = 'You Win';
             }
             break
         }
