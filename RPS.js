@@ -1,29 +1,52 @@
 playerScore = document.querySelector('.playerScore');
 computerScore = document.querySelector('.computerScore'); 
-log = document.querySelector('.log');    
-computerSelection = document.getElementById('PcBox');
+
+log = document.querySelector('.log');
+gameResult = document.querySelector('.gameResult');
+playAgain = document.querySelector('.playAgain');
+computerSelectionBox = document.querySelector('.box');
 
 
 window.addEventListener('click', playRound);
 
+
 function playRound(e) {
-    if (e.target.classList.contains('playerButton')) {
-        let playerSelection = e.target.id;
-        let computerSelection = getComputerSelection();
-        console.log(`show play round function- ${computerSelection}`);
-        console.log(`Computer Selection ${playerSelection}`)
-        let roundResult = checkRoundWinner(playerSelection, computerSelection);
-        console.log(`${roundResult}`)
-        addWinnerScore(roundResult);
+    if (endGame() != 1) {
+        if (e.target.classList.contains('playerButton')) {
+            let playerSelection = e.target.id;
+            let computerSelection = getComputerSelection();
+            showComputerSelection(computerSelection);
+    
+            let roundResult = checkRoundWinner(playerSelection, computerSelection);
+            addWinnerScore(roundResult);
+            logRonudResult(roundResult)
+            endGame();
+        } else {
+            console.log('something');
+        }
     }
 }   
 
 
-function showComputerSelections() {
-    selection = getComputerSelection()
-    console.log(`show computer selection function- ${selection}`)
-    computerSelection.appendChild(document.createTextNode(selection))
+
+
+function endGame() {
+    let flag = false;
+
+    if (playerScore.textContent === '5') {
+        gameResult.textContent = 'You Won';
+        flag = true;
+    } else if (computerScore.textContent === '5') {
+        gameResult.textContent = 'You lost';
+        flag = true;
+    }
+    if (flag) {
+        log.textContent = 'Game Over';
+        playAgain.textContent = 'Play Again?';
+    }
+    return flag;
 }
+
 
 function addWinnerScore (result) {
     if (result === 'Computer') {
@@ -31,7 +54,7 @@ function addWinnerScore (result) {
     } else if (result === 'Player') {
         return counteScoreUp(playerScore);
     } else {
-        return console.log('Tie');
+        return 'tie';
     }
 }
 
@@ -40,6 +63,19 @@ function counteScoreUp(div) {
     div.textContent = counter;
     return div.textContent;
 }
+
+function logRonudResult(result) {
+    switch(result) {
+        case 'Player':
+            return log.textContent = 'You Won';
+        case 'Computer':
+            return log.textContent = 'You Lost';
+        case 'tie':
+            return log.textContent = 'Draw';
+    }
+}
+
+
 
 
 // Computer play randomly and return eiter 'Rock', 'Paper', 'Scissors'.
@@ -53,83 +89,46 @@ function getComputerSelection() {
     return 'scissors';
 }
 
+function showComputerSelection(selection) {
+    return computerSelectionBox.setAttribute('id', selection);
+}
+
+
+
+
 // Compare Player and Computer Selections. Count who win.
 function checkRoundWinner(playerSelection, computerSelection) {
-
-    if (playerSelection == computerSelection) {
+    if (playerSelection === computerSelection) {
         return "tie";
     } else {
         switch(playerSelection) {
         case 'rock':
             // If Player selection is Rock < paper is stronger
-            if (computerSelection != 'paper') {
-                return result = 'Computer Wins';
+            if (computerSelection === 'paper') {
+                return result = 'Computer';
             // Otherwise rock wins > scissors 
             } else {
-                return result = 'You Win';
+                return result = 'Player';
             }
             break
         case 'paper':
             // If Player selection is paper < scissors is stronger
-            if (computerSelection != 'scissors') {
-                return result = 'Computer Wins'; 
+            if (computerSelection === 'scissors') {
+                return result = 'Computer'; 
             // Otherwise paper wins > rock
             } else {
-                return result = 'You Win';
+                return result = 'Player';
             }
             break
         case 'scissors':
             // If Player selection is scissors < rock is stronger
-            if (computerSelection != 'rock') {
-                return result = 'Computer Wins'; 
+            if (computerSelection === 'rock') {
+                return result = 'Computer'; 
             // Otherwise scissors wins > paper
             } else {
-                return result = 'You Win';
+                return result = 'Player';
             }
             break
         }
     }
 }
-
-
-/* function game() {
-    i = 0;
-    playerCounter = 0;
-    computerCounter = 0;
-
-    // Play a five round game
-    while (i < 5) {
-    
-        // Get player and compuer selection
-        let playerSelection = window.addEventListener('click', getPlayerSelection);
-        let computerSelection = getComputerSelection();
-        console.log(`Round No(${i + 1})`);
-        console.log(`\tPlayer Selection:\t${playerSelection} \n\tComputer Selection:\t${computerSelection}`)
-        
-        let roundResult = playRound(playerSelection, computerSelection);
-        console.log(`\t In this Round - ${roundResult}`);
-
-        // Count the winner for each round
-        if (roundResult === 'You Win') {
-            playerCounter++;
-        } else if (roundResult === 'Computer Wins') {
-            computerCounter++;
-        }
-        i++;
-    }
-    
-    const results = finalResults(playerCounter, computerCounter);
-    return console.log(`${results} \nPlayer: ${playerCounter} // Computer: ${computerCounter}`);
-} */
-
-/*     function finalResults(playerCounter, computerCounter) {
-        if (playerCounter > computerCounter) {
-            return "You WIN!"
-        }   else if (playerCounter < computerCounter) {
-            return "You Lost!"
-        } else {
-            return "It is a tie"
-        }
-    } */
- 
-/*     game();  */

@@ -16,9 +16,18 @@ function playRound(e) {
 
         let roundResult = checkRoundWinner(playerSelection, computerSelection);
         addWinnerScore(roundResult);
+        logRonudResult(roundResult)
+        endGame();
     }
 }   
 
+function endGame() {
+    if ((playerScore.textContent === '5') || (computerScore.textContent === '5')) {
+        log.textContent = 'Game Over';
+        // You/Computer win
+        // Try again
+    }
+}
 
 
 function addWinnerScore (result) {
@@ -27,7 +36,7 @@ function addWinnerScore (result) {
     } else if (result === 'Player') {
         return counteScoreUp(playerScore);
     } else {
-        return announceTie();
+        return 'tie';
     }
 }
 
@@ -37,9 +46,15 @@ function counteScoreUp(div) {
     return div.textContent;
 }
 
-function announceTie() {
-    let counter = 0;
-    return log.textContent = `Round ${counter} Tie`;
+function logRonudResult(result) {
+    switch(result) {
+        case 'Player':
+            return log.textContent = 'You Won';
+        case 'Computer':
+            return log.textContent = 'You Lost';
+        case 'tie':
+            return log.textContent = 'Draw';
+    }
 }
 
 
@@ -57,8 +72,7 @@ function getComputerSelection() {
 }
 
 function showComputerSelection(selection) {
-    let x = computerSelectionBox.appendChild(document.createTextNode(selection));
-    return x;
+    return computerSelectionBox.setAttribute('id', selection);
 }
 
 
