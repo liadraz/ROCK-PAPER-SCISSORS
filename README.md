@@ -1,4 +1,4 @@
-# ROCK-PAPER-SCISSORS
+# Rock-Paper-Scissors
 Implementation of the classic ROCK-PAPER-SCISSORS game with JavaScript - HTML - CSS.
 
 Rules -
